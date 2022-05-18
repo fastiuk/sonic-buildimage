@@ -1,0 +1,8 @@
+{
+    "LOGIN_MESSAGE_PRE_TEST": {
+        "desc": "Pre-login message test."
+    },
+    "LOGIN_MESSAGE_POST_TEST": {
+        "desc": "Post-login message test."
+    }
+}

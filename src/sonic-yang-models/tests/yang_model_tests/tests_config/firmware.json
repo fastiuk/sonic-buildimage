@@ -1,0 +1,32 @@
+{
+    "FIRMWARE_TEST": {
+        "sonic-firmware:sonic-firmware": {
+            "sonic-firmware:FIRMWARE": {
+                "asic": {
+                    "auto_update": "enable",
+                    "default": "image"
+                }
+            }
+        }
+    },
+
+    "FIRMWARE_WITH_INVALID_AUTO_UPDATE": {
+        "sonic-firmware:sonic-firmware": {
+            "sonic-firmware:FIRMWARE": {
+                "asic": {
+                    "auto_update": "invalid"
+                }
+            }
+        }
+    },
+
+    "FIRMWARE_WITH_INVALID_DEFAULT": {
+        "sonic-firmware:sonic-firmware": {
+            "sonic-firmware:FIRMWARE": {
+                "asic": {
+                    "default": "invalid"
+                }
+            }
+        }
+    }
+}

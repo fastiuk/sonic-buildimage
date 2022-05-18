@@ -1801,8 +1801,25 @@
                 "enabled": "true",
                 "num_dumps": "3",
                 "memory": "0M-2G:256M,2G-4G:256M,4G-8G:384M,8G-:448M"
-             }
-         }
+            }
+        },
+
+        "LOGIN_MESSAGE": {
+            "pre_login": {
+                "message": "Pre-login message"
+            },
+            "post_login": {
+                "message": "Post-login message"
+            }
+        },
+
+        "FIRMWARE": {
+            "asic": {
+                "auto_update": "enable",
+                "default": "user"
+            }
+        }
+
     },
     "SAMPLE_CONFIG_DB_UNKNOWN": {
         "UNKNOWN_TABLE": {
