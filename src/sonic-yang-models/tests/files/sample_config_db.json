@@ -1911,6 +1911,12 @@
                 "default_dynamic_th": "0",
                 "over_subscribe_ratio": "0"
             }
+        },
+        "FIRMWARE": {
+            "asic": {
+                "auto_update": "enable",
+                "default": "user"
+            }
         }
     },
     "SAMPLE_CONFIG_DB_UNKNOWN": {

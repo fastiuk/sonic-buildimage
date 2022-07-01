@@ -1,0 +1,57 @@
+module sonic-firmware {
+
+    yang-version 1.1;
+
+    namespace "http://github.com/Azure/sonic-firmware";
+    prefix firmware;
+
+    description "FIRMWARE YANG Module for SONiC-based OS";
+
+    revision 2022-05-05 {
+        description "First Revision";
+    }
+
+    typedef auto-update {
+        description "Configuration to set if firmware is going to be updated
+                     automatically";
+        type string {
+            pattern "enable|disable";
+        }
+    }
+
+    typedef default-source {
+        description "Configuration to set firmware source: system image or 
+                     user-defined";
+        type string {
+            pattern "image|user";
+        }
+    }
+
+    container sonic-firmware {
+
+        container FIRMWARE {
+
+            description "FIRMWARE part of config_db.json";
+
+            container asic {
+
+                leaf auto_update {
+                    description "ASIC FW auto-update state";
+                    type auto-update;
+                    default "enable";
+                }
+
+                leaf default {
+                    description "Default source of ASIC FW image file";
+                    type default-source;
+                    default "image";
+                }
+
+            }
+
+        }
+        /* end of container FIRMWARE */
+    }
+    /* end of top level container */
+}
+/* end of module sonic-firmware */

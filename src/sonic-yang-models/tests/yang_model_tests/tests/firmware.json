@@ -1,0 +1,15 @@
+{
+    "FIRMWARE_TEST": {
+        "desc": "Firmware simple table."
+    },
+    "FIRMWARE_WITH_INVALID_AUTO_UPDATE" : {
+        "desc": "Referring invalid firmware auto-update field.",
+        "eStrKey": "Pattern",
+        "eStr": ["enable|disable"]
+    },
+    "FIRMWARE_WITH_INVALID_DEFAULT" : {
+        "desc": "Referring invalid firmware default field.",
+        "eStrKey": "Pattern",
+        "eStr": ["image|user"]
+    }
+}
