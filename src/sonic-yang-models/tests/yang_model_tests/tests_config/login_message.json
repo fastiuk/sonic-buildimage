@@ -1,0 +1,20 @@
+{
+    "LOGIN_MESSAGE_PRE_TEST": {
+        "sonic-login_message:sonic-login_message": {
+            "sonic-login_message:LOGIN_MESSAGE": {
+                "pre_login": {
+                    "message": "Pre"
+                }
+            }
+        }
+    },
+    "LOGIN_MESSAGE_POST_TEST": {
+        "sonic-login_message:sonic-login_message": {
+            "sonic-login_message:LOGIN_MESSAGE": {
+                "post_login": {
+                    "message": "Post"
+                }
+            }
+        }
+    }
+}

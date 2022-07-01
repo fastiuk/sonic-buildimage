@@ -1941,6 +1941,14 @@
                 "default_dynamic_th": "0",
                 "over_subscribe_ratio": "0"
             }
+        },
+        "LOGIN_MESSAGE": {
+            "pre_login": {
+                "message": "Pre-login message"
+            },
+            "post_login": {
+                "message": "Post-login message"
+            }
         }
     },
     "SAMPLE_CONFIG_DB_UNKNOWN": {

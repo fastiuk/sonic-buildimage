@@ -1,0 +1,40 @@
+module sonic-login_message {
+
+    yang-version 1.1;
+
+    namespace "http://github.com/Azure/sonic-login_message";
+    prefix login_message;
+
+    description "LOGIN_MESSAGE YANG Module for SONiC-based OS";
+
+    revision 2022-03-21 {
+        description "First Revision";
+    }
+
+    container sonic-login_message {
+
+        container LOGIN_MESSAGE {
+
+            description "LOGIN_MESSAGE part of config_db.json";
+
+            container pre_login {
+
+                leaf message {
+                    type string;
+                }
+
+            }
+
+            container post_login {
+
+                leaf message {
+                    type string;
+                }
+
+            }
+        }
+        /* end of container LOGIN_MESSAGE */
+    }
+    /* end of top level container */
+}
+/* end of module sonic-login_message */
