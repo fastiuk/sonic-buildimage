@@ -109,4 +109,13 @@
             "special_class": "true"
         }
     }
+{% if sonic_asic_platform == 'mellanox' %}
+    ,
+    "FIRMWARE": {
+        "asic": {
+            "auto_update": "enable",
+            "default": "image"
+        }
+    }
+{% endif %}
 }

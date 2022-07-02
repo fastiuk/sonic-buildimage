@@ -181,17 +181,33 @@ function RunCmd() {
 }
 
 function UpgradeFW() {
+    # Parse arguments
+    while [ "$#" -ge "1" ]; do
+        case "$1" in
+            --from-file)
+                local -r INSTALL_FROM_FILE="${YES_PARAM}"
+                local -r _FW_USER_FILE="$2"
+                shift
+            ;;
+        esac
+        shift
+    done
+
     local -r _FS_MOUNTPOINT="$1"
 
-    local -r _ASIC_TYPE="$(GetAsicType)"
-    if [[ "${_ASIC_TYPE}" = "${UNKN_ASIC}" ]]; then
-        ExitFailure "failed to detect ASIC type"
-    fi
-
-    if [ ! -z "${_FS_MOUNTPOINT}" ]; then
-        local -r _FW_FILE="${_FS_MOUNTPOINT}/${FW_FILE_MAP[$_ASIC_TYPE]}"
+    if [ "${INSTALL_FROM_FILE}" = "${YES_PARAM}" ]; then
+        local -r _FW_FILE="${_FW_USER_FILE}"
     else
-        local -r _FW_FILE="${FW_FILE_MAP[$_ASIC_TYPE]}"
+        local -r _ASIC_TYPE="$(GetAsicType)"
+        if [[ "${_ASIC_TYPE}" = "${UNKN_ASIC}" ]]; then
+            ExitFailure "failed to detect ASIC type"
+        fi
+
+        if [ ! -z "${_FS_MOUNTPOINT}" ]; then
+            local -r _FW_FILE="${_FS_MOUNTPOINT}/${FW_FILE_MAP[$_ASIC_TYPE]}"
+        else
+            local -r _FW_FILE="${FW_FILE_MAP[$_ASIC_TYPE]}"
+        fi
     fi
 
     if [ ! -f "${_FW_FILE}" ]; then
@@ -250,22 +266,46 @@ function UpgradeFWFromImage() {
     fi
 }
 
+function UpgradeFWFromFile() {
+    local -r _FW_USER_FILE="/host/mlnx/asic/fw.mfa"
+
+    if [ ! -f "${_FW_USER_FILE}" ]; then
+        LogWarning "User defined ASIC firmware file not installed"
+        ExitFailure "Failed to upgrade ASIC firmware"
+    fi
+
+    UpgradeFW --from-file "${_FW_USER_FILE}"
+}
+
 function ExitIfQEMU() {
     if [ -n "$(lspci -vvv | grep SimX)" ]; then
         ExitSuccess "No FW upgrade for SimX platform"
     fi
 }
 
+function ExitIfAutoUpdateDisabled() {
+    local -r AUSTATE="$(sonic-cfggen -d -v FIRMWARE[\'asic\'][\'auto_update\'])"
+    if [[ "${AUSTATE}" == "disable" ]]; then
+        ExitSuccess "FW auto update disabled. Firmware won't be upgrade"
+    fi
+}
+
 ParseArguments "$@"
 
 ExitIfQEMU
+ExitIfAutoUpdateDisabled
 
 WaitForDevice
 
-if [ "${IMAGE_UPGRADE}" != "${YES_PARAM}" ]; then
-    UpgradeFW
+DEFAULT_SOURCE="$(sonic-cfggen -d -v FIRMWARE[\'asic\'][\'default\'])"
+if [ "${DEFAULT_SOURCE}" != "user" ]; then
+    if [ "${IMAGE_UPGRADE}" != "${YES_PARAM}" ]; then
+        UpgradeFW
+    else
+        UpgradeFWFromImage
+    fi
 else
-    UpgradeFWFromImage
+    UpgradeFWFromFile
 fi
 
 ExitSuccess "firmware upgrade is completed"
