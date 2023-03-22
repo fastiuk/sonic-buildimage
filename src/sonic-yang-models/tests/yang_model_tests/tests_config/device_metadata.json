@@ -332,5 +332,23 @@
                 }
             }
         }
+    },
+    "DEVICE_METADATA_VALID_TIMEZONE": {
+        "sonic-device_metadata:sonic-device_metadata": {
+            "sonic-device_metadata:DEVICE_METADATA": {
+                "sonic-device_metadata:localhost": {
+                    "timezone": "Etc/UTC"
+                }
+            }
+        }
+    },
+    "DEVICE_METADATA_INVALID_TIMEZONE": {
+        "sonic-device_metadata:sonic-device_metadata": {
+            "sonic-device_metadata:DEVICE_METADATA": {
+                "sonic-device_metadata:localhost": {
+                    "timezone": ""
+                }
+            }
+        }
     }
 }

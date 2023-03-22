@@ -125,6 +125,13 @@
     },
     "DEVICE_METADATA_ADVERTISE_LO_PREFIX_AS_128": {
         "desc": "Verifying advertising lo prefix as /128."
+    },
+    "DEVICE_METADATA_VALID_TIMEZONE": {
+        "desc": "Verifying valid timezone value"
+    },
+    "DEVICE_METADATA_INVALID_TIMEZONE": {
+        "desc": "Verifying invalid timezone value",
+        "eStrKey": "Range"
     }
 
 }
